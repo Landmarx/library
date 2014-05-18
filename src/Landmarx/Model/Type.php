@@ -1,18 +1,11 @@
 <?php
 namespace Landmarx\Model;
 
-use Landmarx\Interfaces\LandmarkInterface;
+use Landmarx\Interfaces\TypeInterface;
 use Landmarx\Interfaces\AntecedentInterface;
-use Landmarx\Interfaces\FactoryInterface;
 
-class Landmark implements LandmarkInterface, AntecedentInterface
+class Type implements TypeInterface, AntecedentInterface
 {
-    /**
-     * Landmark Factory
-     * @var Landmarx\Interfaces\FactoryInterface
-     */
-    protected $factory;
-    
     /**
      * Name
      * @var string
@@ -26,46 +19,22 @@ class Landmark implements LandmarkInterface, AntecedentInterface
     protected $description;
     
     /**
-     * Landmark type
-     * @var Landmarx\Model\LandmarkType
-     */
-    protected $type;
-    
-    /**
-     * Is landmark public
+     * Is type public
      * @var boolean
      */
     protected $public;
     
     /**
-     * Landmark parent
-     * @var Landmarx\Model\Landmark
+     * Type parent
+     * @var Landmarx\Model\Type
      */
     protected $parent;
-    
-    /**
-     * Latitude
-     * @var float 
-     */
-    protected $latitude;
-    
-    /**
-     * Longitude
-     * @var float 
-     */
-    protected $longitude;
     
     /**
      * Children
      * @var array 
      */
     protected $children;
-    
-    /**
-     * Attributes
-     * @var array
-     */
-    protected $attributes;
     
     /**
      * @{inheritdoc}
@@ -106,24 +75,6 @@ class Landmark implements LandmarkInterface, AntecedentInterface
     /**
      * @{inheritdoc}
      */
-    public function getType()
-    {
-        return $this->type;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function setType(Type $type)
-    {
-        $this->type = $type;
-        
-        return $this;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
     public function getPublic()
     {
         return $this->public;
@@ -141,42 +92,6 @@ class Landmark implements LandmarkInterface, AntecedentInterface
         }
         
         return (boolean) $this->public;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-        
-        return $this;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-        
-        return $this;
     }
     
     /**
@@ -226,7 +141,7 @@ class Landmark implements LandmarkInterface, AntecedentInterface
     /**
      * @{inheritdoc}
      */
-    public function hasChild(Landmark $child)
+    public function hasChild(Type $child)
     {
         return in_array($child, $this->children);
     }
@@ -237,60 +152,6 @@ class Landmark implements LandmarkInterface, AntecedentInterface
     public function removeChild(Landmark $child)
     {
         unset($this->children[$child]);
-        
-        return $this;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-        
-        return $this;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function hasAttributes()
-    {
-        return (count($this->attributes) > 1);
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function getAttribute(Landmark $attribute)
-    {
-        return (in_array($attribute, $this->attributes) ?: $this->attributes[$attribute]);
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function addAttribute(Landmark $attribute)
-    {
-        $this->attributes[] = $attribute;
-        
-        return $this;
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function removeAttribute(Landmark $attribute)
-    {
-        unset($this->attributes[$attribute]);
         
         return $this;
     }
@@ -359,15 +220,5 @@ class Landmark implements LandmarkInterface, AntecedentInterface
     public function offsetUnset($name)
     {
         $this->removeChild($name);
-    }
-    
-    /**
-     * @{inheritdoc}
-     */
-    public function setFactory(FactoryInterface $factory)
-    {
-        $this->factory = $factory;
-        
-        return $this;
     }
 }

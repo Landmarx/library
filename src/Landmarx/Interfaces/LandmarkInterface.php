@@ -105,27 +105,6 @@ interface LandmarkInterface extends \ArrayAccess, \Countable, \IteratorAggregate
     public function setAttributes(array $attributes);
     
     /**
-     * Get Children
-     * 
-     * @return array
-     */
-    public function getChildren();
-    
-    /**
-     * Set Children
-     * 
-     * @return LandmarkInterface
-     */
-    public function setChildren(array $children);
-        
-    /**
-     * Has Children
-     * 
-     * @return bool
-     */
-    public function hasChildren();
-    
-    /**
      * Is Public
      * 
      * @param bool|null $public yes|no|null
@@ -145,5 +124,5 @@ interface LandmarkInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      * @param LandmarkInterface $parent parent
      * @return LandmarkInterface
      */
-    public function setParent(LandmarkInterface $parent = null);    
+    public function setParent(LandmarkInterface $parent = null);
 }

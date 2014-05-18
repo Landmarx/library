@@ -1,13 +1,12 @@
-# Landmarx Node Library
+# Landmarx Node Mapping Library
 
 Landmark node mapping library for the landmarx system.
 
 1. installation
 2. usage
-3. advanced
 
 ## Installation
-# Composer
+### Composer
 Add this to your `composer.json` file:
 ```js
 "landmarx\library": "@dev"
@@ -19,27 +18,32 @@ $ php composer.phar update "landmarx\library"
 ```
 
 ## Usage
-
+#Basic usage:
 ```php
+use Landmarx\Factory\LandmarkFactory;
+use Landmarx\Model\Type as LandmarkType;
+use Landmarx\Renderer\ListRenderer;
+
+$factory = new LandmarkFactory();
+
 $mtn_rng = new LandmarkType('mountain range');
+$mtn = new LandmarkType('mountain');
+$mtn->setParent($mtn_rng);
+
+// Landmark created by name only
 $landmark = new Landmark('appalachian mountain range');
 $landmark->setLatitude(74.00)->setLongitude(-47.98);
 $landmark->setType($mtn_rng);
 
-$mtn = new LandmarkType('mountain');
-$mtn->setParent($mtn_rng);
-
+// Child landmark
 $child = new Landmark('katahdin');
 $child->setLatitude(79.76)->setLongitude(-40.99);
 $child->setType($mtn)->setParent($landmark);
 
-$landmark->render();
+// render landarks
+$renderer = new ListRenderer();
+$renderer->render($landmark);
 ```
+This would output a nest unordered list.
 
-## Advanced Usage
-
-```php
-$list = new ListRenderer();
-$landmark->setRenderer($list);
-$landmark->renderer->setTemplate($template);
-```
+#Advanced Usage
