@@ -1,0 +1,33 @@
+{
+    "name":         "landmarx/library",
+    "type":         "library",
+    "description":  "An object oriented landmark library",
+    "keywords":     ["node", "tree"],
+    "homepage":     "http://daviddurost.net",
+    "license":      "MIT",
+    "authors":      [
+        {
+            "name":     "David Durost",
+            "homepage": "http://daviddurost.net"
+        }
+    ],
+    "require":      {
+        "php":  ">=5.5"
+    },
+    "require-dev":  {
+        "twig/twig":    ">=1.2,<2.0-dev",
+        "phpunit/phpunit": "4.1.*"
+    },
+    "suggest":      {
+        "twig/twig":    "for the TwigRenderer and the integration with your templates"
+    },
+    "autoload":     {
+        "psr-0": { "Landmarx\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.0"
+        }
+    },
+    "minimum-stability": "dev"
+}
